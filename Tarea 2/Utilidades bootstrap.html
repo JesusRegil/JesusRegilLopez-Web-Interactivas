@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilidades de Bootstrap - Demostración</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            padding-top: 70px;
+            background-color: #f8f9fa;
+        }
+
+        .section-title {
+            border-bottom: 3px solid #0d6efd;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .demo-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .demo-box h5 {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 8px;
+        }
+
+        .code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        .code-block .tag {
+            color: #569cd6;
+        }
+
+        .code-block .attr {
+            color: #9cdcfe;
+        }
+
+        .code-block .value {
+            color: #ce9178;
+        }
+
+        .code-block .comment {
+            color: #6a9955;
+        }
+
+        .code-label {
+            display: inline-block;
+            background-color: #2d2d2d;
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-radius: 4px 4px 0 0;
+            font-family: monospace;
+            margin-top: 15px;
+        }
+
+        .descripcion {
+            background-color: #e7f3ff;
+            border-left: 4px solid #0d6efd;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .descripcion i {
+            color: #0d6efd;
+        }
+
+        .ejemplo-wrap {
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            background-color: #fafafa;
+            margin-bottom: 10px;
+        }
+
+        .badge-code {
+            font-size: 0.65rem;
+            background-color: #2d2d2d;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .utilidad-demo {
+            background-color: #fafafa;
+            border: 1px dashed #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ======================== -->
+    <!-- NAVBAR (Header fijo)    -->
+    <!-- ======================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-tools text-primary"></i>
+                Utilidades
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#colores">Colores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bordes">Bordes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sombras">Sombras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#display">Display</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#flexbox">Flexbox</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#espaciado">Espaciado</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#posicion">Posición</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#responsive">Responsive</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ======================== -->
+    <!-- CONTENIDO PRINCIPAL     -->
+    <!-- ======================== -->
+    <div class="container">
+
+        <!-- Título principal -->
+        <div class="text-center py-4 mb-4">
+            <h1 class="display-4 fw-bold text-primary">
+                <i class="bi bi-tools"></i> Utilidades
+            </h1>
+            <p class="lead text-muted">
+                Clases utilitarias para estilar sin CSS personalizado
+            </p>
+            <div class="d-flex justify-content-center gap-2 flex-wrap">
+                <span class="badge bg-secondary">Colores</span>
+                <span class="badge bg-secondary">Bordes</span>
+                <span class="badge bg-secondary">Sombras</span>
+                <span class="badge bg-secondary">Display</span>
+                <span class="badge bg-secondary">Flexbox</span>
+                <span class="badge bg-secondary">Espaciado</span>
+                <span class="badge bg-secondary">Posición</span>
+                <span class="badge bg-secondary">Responsive</span>
+            </div>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 1: COLORES Y FONDO                                      -->
+        <!-- ================================================================ -->
+        <section id="colores" class="demo-box">
+            <h3 class="section-title">
+                <i class="bi bi-palette text-primary"></i> 1. Colores y Fondo
+            </h3>
+            <p class="text-muted">Clases para cambiar color de texto y fondo.</p>
+
+            <div class="descripcion">
+                <i class="bi bi-info-circle"></i>
+                <strong>.text-*</strong> - Color de texto (primary, success, danger, etc.)<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.bg-*</strong> - Color de fondo (primary, success, danger, etc.)<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.bg-gradient</strong> - Añade degradado al fondo
+            </div>
+
+            <h5>Colores de texto</h5>
+            <div class="ejemplo-wrap">
+                <p class="text-primary">.text-primary - Texto azul</p>
+                <p class="text-secondary">.text-secondary - Texto gris</p>
+                <p class="text-success">.text-success - Texto verde</p>
+                <p class="text-danger">.text-danger - Texto rojo</p>
+                <p class="text-warning">.text-warning - Texto amarillo</p>
+                <p class="text-info">.text-info - Texto celeste</p>
+                <p class="text-muted">.text-muted - Texto atenuado</p>
+                <p class="text-white bg-dark">.text-white .bg-dark - Texto blanco sobre fondo oscuro</p>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;p</span> <span class="attr">class</span>=<span
+                    class="value">"text-primary"</span><span class="tag">&gt;</span>Texto azul<span
+                    class="tag">&lt;/p&gt;</span><br>
+                <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="value">"text-white
+                    bg-dark"</span><span class="tag">&gt;</span>Texto blanco fondo oscuro<span
+                    class="tag">&lt;/p&gt;</span>
+            </div>
+
+            <h5 class="mt-4">Colores de fondo</h5>
+            <div class="ejemplo-wrap">
+                <div class="bg-primary text-white p-2 mb-1">.bg-primary</div>
+                <div class="bg-secondary text-white p-2 mb-1">.bg-secondary</div>
+                <div class="bg-success text-white p-2 mb-1">.bg-success</div>
+                <div class="bg-danger text-white p-2 mb-1">.bg-danger</div>
+                <div class="bg-warning p-2 mb-1">.bg-warning</div>
+                <div class="bg-info p-2 mb-1">.bg-info</div>
+                <div class="bg-light p-2 mb-1">.bg-light</div>
+                <div class="bg-dark text-white p-2 mb-1">.bg-dark</div>
+                <div class="bg-primary bg-gradient text-white p-2">.bg-primary .bg-gradient</div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"bg-primary
+                    text-white p-2"</span><span class="tag">&gt;</span>Fondo azul<span
+                    class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"bg-primary
+                    bg-gradient text-white p-2"</span><span class="tag">&gt;</span>Fondo con degradado<span
+                    class="tag">&lt;/div&gt;</span>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 2: BORDES                                               -->
+        <!-- ================================================================ -->
+        <section id="bordes" class="demo-box">
+            <h3 class="section-title">
+                <i class="bi bi-border-width text-primary"></i> 2. Bordes y Redondeo
+            </h3>
+            <p class="text-muted">Clases para añadir bordes, colores y redondeo.</p>
+
+            <div class="descripcion">
+                <i class="bi bi-info-circle"></i>
+                <strong>.border</strong> - Añade borde<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.border-*</strong> - Color del borde (border-primary, border-danger)<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.border-{1-5}</strong> - Grosor del borde<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.rounded</strong> - Esquinas redondeadas<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.rounded-circle</strong> - Forma circular<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.rounded-pill</strong> - Forma de píldora
+            </div>
+
+            <h5>Bordes básicos</h5>
+            <div class="ejemplo-wrap">
+                <div class="d-flex gap-2 flex-wrap">
+                    <div class="border p-3">.border</div>
+                    <div class="border border-primary p-3">.border-primary</div>
+                    <div class="border border-success p-3">.border-success</div>
+                    <div class="border border-danger p-3">.border-danger</div>
+                    <div class="border border-warning p-3">.border-warning</div>
+                    <div class="border border-info p-3">.border-info</div>
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"border
+                    border-primary p-3"</span><span class="tag">&gt;</span>Borde azul<span
+                    class="tag">&lt;/div&gt;</span>
+            </div>
+
+            <h5 class="mt-4">Grosor de borde</h5>
+            <div class="ejemplo-wrap">
+                <div class="d-flex gap-2 flex-wrap">
+                    <div class="border border-1 p-3">.border-1</div>
+                    <div class="border border-2 p-3">.border-2</div>
+                    <div class="border border-3 p-3">.border-3</div>
+                    <div class="border border-4 p-3">.border-4</div>
+                    <div class="border border-5 p-3">.border-5</div>
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"border border-4
+                    border-primary p-3"</span><span class="tag">&gt;</span>Borde grueso azul<span
+                    class="tag">&lt;/div&gt;</span>
+            </div>
+
+            <h5 class="mt-4">Redondeo</h5>
+            <div class="ejemplo-wrap">
+                <div class="d-flex gap-2 flex-wrap align-items-center">
+                    <div class="border rounded p-3">.rounded</div>
+                    <div class="border rounded-0 p-3">.rounded-0</div>
+                    <div class="border rounded-1 p-3">.rounded-1</div>
+                    <div class="border rounded-2 p-3">.rounded-2</div>
+                    <div class="border rounded-3 p-3">.rounded-3</div>
+                    <div class="border rounded-circle p-3"
+                        style="width:80px;height:80px;display:flex;align-items:center;justify-content:center;">
+                        .rounded-circle</div>
+                    <div class="border rounded-pill p-3">.rounded-pill</div>
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"border
+                    rounded-circle"</span><span class="tag">&gt;</span>Circular<span class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"border
+                    rounded-pill"</span><span class="tag">&gt;</span>Píldora<span class="tag">&lt;/div&gt;</span>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 3: SOMBRAS                                              -->
+        <!-- ================================================================ -->
+        <section id="sombras" class="demo-box">
+            <h3 class="section-title">
+                <i class="bi bi-box-shadow text-primary"></i> 3. Sombras
+            </h3>
+            <p class="text-muted">Clases para añadir sombras a los elementos.</p>
+
+            <div class="descripcion">
+                <i class="bi bi-info-circle"></i>
+                <strong>.shadow-none</strong> - Sin sombra<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.shadow-sm</strong> - Sombra pequeña<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.shadow</strong> - Sombra normal<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.shadow-lg</strong> - Sombra grande
+            </div>
+
+            <div class="ejemplo-wrap">
+                <div class="d-flex gap-3 flex-wrap">
+                    <div class="p-4 bg-white shadow-none border">.shadow-none</div>
+                    <div class="p-4 bg-white shadow-sm border">.shadow-sm</div>
+                    <div class="p-4 bg-white shadow border">.shadow</div>
+                    <div class="p-4 bg-white shadow-lg border">.shadow-lg</div>
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"p-4 bg-white
+                    shadow-sm"</span><span class="tag">&gt;</span>Sombra pequeña<span
+                    class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"p-4 bg-white
+                    shadow-lg"</span><span class="tag">&gt;</span>Sombra grande<span class="tag">&lt;/div&gt;</span>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 4: DISPLAY                                              -->
+        <!-- ================================================================ -->
+        <section id="display" class="demo-box">
+            <h3 class="section-title">
+                <i class="bi bi-eye text-primary"></i> 4. Display y Visibilidad
+            </h3>
+            <p class="text-muted">Clases para controlar la visualización de elementos.</p>
+
+            <div class="descripcion">
+                <i class="bi bi-info-circle"></i>
+                <strong>.d-none</strong> - Oculta el elemento (no ocupa espacio)<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.d-block</strong> - Display: block<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.d-inline-block</strong> - Display: inline-block<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.d-flex</strong> - Display: flex<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.d-grid</strong> - Display: grid<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.invisible</strong> - Oculta pero ocupa espacio<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.overflow-auto</strong> - Scroll automático
+            </div>
+
+            <h5>Display</h5>
+            <div class="ejemplo-wrap">
+                <div class="d-block bg-primary text-white p-2 mb-1">.d-block</div>
+                <span class="d-inline-block bg-success text-white p-2">.d-inline-block</span>
+                <span class="d-inline-block bg-danger text-white p-2">.d-inline-block</span>
+                <div class="d-flex bg-light p-2 mt-2">
+                    <div class="bg-primary text-white p-2">Flex</div>
+                    <div class="bg-success text-white p-2">Flex</div>
+                    <div class="bg-danger text-white p-2">Flex</div>
+                </div>
+                <div class="d-grid bg-light p-2 mt-2" style="grid-template-columns:1fr 1fr;">
+                    <div class="bg-primary text-white p-2">Grid 1</div>
+                    <div class="bg-success text-white p-2">Grid 2</div>
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"d-block"</span><span class="tag">&gt;</span>Bloque<span
+                    class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;span</span> <span class="attr">class</span>=<span
+                    class="value">"d-inline-block"</span><span class="tag">&gt;</span>Inline-block<span
+                    class="tag">&lt;/span&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"d-flex"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+            </div>
+
+            <h5 class="mt-4">Visibilidad y overflow</h5>
+            <div class="ejemplo-wrap">
+                <div class="d-flex gap-2">
+                    <div class="bg-primary text-white p-2">Visible</div>
+                    <div class="invisible bg-success text-white p-2">Invisible (ocupa espacio)</div>
+                    <div class="d-none bg-danger text-white p-2">Oculto</div>
+                </div>
+                <div class="overflow-auto mt-2" style="max-height:60px;width:200px;border:1px solid #ddd;padding:5px;">
+                    Texto largo que se desborda. Texto largo que se desborda. Texto largo que se desborda.
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"invisible"</span><span class="tag">&gt;</span>Invisible<span
+                    class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"d-none"</span><span class="tag">&gt;</span>Oculto<span
+                    class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"overflow-auto"</span><span class="tag">&gt;</span>...<span
+                    class="tag">&lt;/div&gt;</span>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 5: FLEXBOX                                              -->
+        <!-- ================================================================ -->
+        <section id="flexbox" class="demo-box">
+            <h3 class="section-title">
+                <i class="bi bi-layout-three-columns text-primary"></i> 5. Flexbox
+            </h3>
+            <p class="text-muted">Clases para crear layouts flexibles sin CSS.</p>
+
+            <div class="descripcion">
+                <i class="bi bi-info-circle"></i>
+                <strong>.d-flex</strong> - Activa flexbox<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.flex-row / .flex-column</strong> - Dirección<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.justify-content-*</strong> - Alineación horizontal<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.align-items-*</strong> - Alineación vertical<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.gap-*</strong> - Espaciado entre elementos<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.flex-wrap</strong> - Envolver elementos
+            </div>
+
+            <h5>Dirección y alineación</h5>
+            <div class="ejemplo-wrap">
+                <p><strong>Flex row con justify-content-center</strong></p>
+                <div class="d-flex justify-content-center bg-light p-2 gap-2">
+                    <div class="bg-primary text-white p-2">1</div>
+                    <div class="bg-success text-white p-2">2</div>
+                    <div class="bg-danger text-white p-2">3</div>
+                </div>
+
+                <p class="mt-2"><strong>Flex row con justify-content-between</strong></p>
+                <div class="d-flex justify-content-between bg-light p-2">
+                    <div class="bg-primary text-white p-2">Izquierda</div>
+                    <div class="bg-success text-white p-2">Centro</div>
+                    <div class="bg-danger text-white p-2">Derecha</div>
+                </div>
+
+                <p class="mt-2"><strong>Flex column (vertical)</strong></p>
+                <div class="d-flex flex-column gap-2 bg-light p-2">
+                    <div class="bg-primary text-white p-2">Elemento 1</div>
+                    <div class="bg-success text-white p-2">Elemento 2</div>
+                    <div class="bg-danger text-white p-2">Elemento 3</div>
+                </div>
+
+                <p class="mt-2"><strong>Centrado vertical y horizontal</strong></p>
+                <div class="d-flex justify-content-center align-items-center bg-light" style="height:120px;">
+                    <div class="bg-primary text-white p-3 rounded">Centrado</div>
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="comment">&lt;!-- Centrar horizontalmente --&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"d-flex
+                    justify-content-center gap-2"</span><span class="tag">&gt;</span>...<span
+                    class="tag">&lt;/div&gt;</span><br>
+                <span class="comment">&lt;!-- Centrar vertical y horizontalmente --&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"d-flex
+                    justify-content-center align-items-center"</span><span class="tag">&gt;</span>...<span
+                    class="tag">&lt;/div&gt;</span><br>
+                <span class="comment">&lt;!-- Columna vertical --&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"d-flex flex-column
+                    gap-2"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+            </div>
+
+            <h5 class="mt-4">Flex wrap y gap</h5>
+            <div class="ejemplo-wrap">
+                <div class="d-flex flex-wrap gap-2 bg-light p-2">
+                    <div class="bg-primary text-white p-2" style="width:150px;">Item 1</div>
+                    <div class="bg-success text-white p-2" style="width:150px;">Item 2</div>
+                    <div class="bg-danger text-white p-2" style="width:150px;">Item 3</div>
+                    <div class="bg-warning text-white p-2" style="width:150px;">Item 4</div>
+                    <div class="bg-info text-white p-2" style="width:150px;">Item 5</div>
+                </div>
+                <p class="mt-1"><small>.flex-wrap permite que los elementos se envuelvan</small></p>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"d-flex flex-wrap
+                    gap-3"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"bg-primary p-2"</span><span class="tag">&gt;</span>Item 1<span
+                    class="tag">&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"bg-success p-2"</span><span class="tag">&gt;</span>Item 2<span
+                    class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;/div&gt;</span>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 6: ESPACIADO                                            -->
+        <!-- ================================================================ -->
+        <section id="espaciado" class="demo-box">
+            <h3 class="section-title">
+                <i class="bi bi-arrows-expand text-primary"></i> 6. Espaciado (Margin y Padding)
+            </h3>
+            <p class="text-muted">Clases para añadir márgenes y paddings sin CSS.</p>
+
+            <div class="descripcion">
+                <i class="bi bi-info-circle"></i>
+                <strong>m-*</strong> - Margin (margen externo)<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>p-*</strong> - Padding (relleno interno)<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>t, b, s, e, x, y</strong> - Lados (top, bottom, start, end, horizontal, vertical)<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>0-5</strong> - Tamaños (0=0, 1=4px, 2=8px, 3=16px, 4=24px, 5=48px)<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>auto</strong> - Automático (ej: mx-auto centra horizontalmente)
+            </div>
+
+            <h5>Margin</h5>
+            <div class="ejemplo-wrap">
+                <div class="bg-light p-2">
+                    <div class="bg-primary text-white p-2 m-1">.m-1</div>
+                    <div class="bg-success text-white p-2 m-2">.m-2</div>
+                    <div class="bg-danger text-white p-2 m-3">.m-3</div>
+                    <div class="bg-warning p-2 m-4">.m-4</div>
+                    <div class="bg-info p-2 m-5">.m-5</div>
+                    <div class="bg-dark text-white p-2 mx-auto" style="width:200px;">.mx-auto (centrado)</div>
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"bg-primary p-2
+                    m-3"</span><span class="tag">&gt;</span>Margin 3<span class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"bg-dark p-2
+                    mx-auto"</span> <span class="attr">style</span>=<span class="value">"width:200px;"</span><span
+                    class="tag">&gt;</span>Centrado<span class="tag">&lt;/div&gt;</span>
+            </div>
+
+            <h5 class="mt-4">Padding</h5>
+            <div class="ejemplo-wrap">
+                <div class="d-flex gap-2 flex-wrap">
+                    <div class="bg-primary text-white p-1">.p-1</div>
+                    <div class="bg-success text-white p-2">.p-2</div>
+                    <div class="bg-danger text-white p-3">.p-3</div>
+                    <div class="bg-warning p-4">.p-4</div>
+                    <div class="bg-info p-5">.p-5</div>
+                </div>
+                <div class="mt-2">
+                    <div class="bg-primary text-white pt-3 pb-1 ps-4 pe-2">.pt-3 .pb-1 .ps-4 .pe-2</div>
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"bg-primary
+                    p-3"</span><span class="tag">&gt;</span>Padding 3<span class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"bg-primary pt-3
+                    pb-1 ps-4 pe-2"</span><span class="tag">&gt;</span>Padding por lados<span
+                    class="tag">&lt;/div&gt;</span>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 7: POSICIÓN                                             -->
+        <!-- ================================================================ -->
+        <section id="posicion" class="demo-box">
+            <h3 class="section-title">
+                <i class="bi bi-pin-map text-primary"></i> 7. Posicionamiento
+            </h3>
+            <p class="text-muted">Clases para posicionar elementos de forma absoluta, relativa o sticky.</p>
+
+            <div class="descripcion">
+                <i class="bi bi-info-circle"></i>
+                <strong>.position-relative</strong> - Contenedor relativo<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.position-absolute</strong> - Posición absoluta<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.top-0, .bottom-0, .start-0, .end-0</strong> - Posición 0<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.translate-middle</strong> - Centra con transform<br>
+                <i class="bi bi-info-circle"></i>
+                <strong>.position-sticky</strong> - Se pega al scroll
+            </div>
+
+            <h5>Posición absoluta</h5>
+            <div class="ejemplo-wrap">
+                <div class="position-relative bg-light p-5" style="height:200px;">
+                    <div class="position-absolute top-0 start-0 bg-primary text-white p-2">.top-0 .start-0</div>
+                    <div class="position-absolute top-0 end-0 bg-success text-white p-2">.top-0 .end-0</div>
+                    <div class="position-absolute bottom-0 start-0 bg-danger text-white p-2">.bottom-0 .start-0</div>
+                    <div class="position-absolute bottom-0 end-0 bg-warning p-2">.bottom-0 .end-0</div>
+                    <div class="position-absolute top-50 start-50 translate-middle bg-dark text-white p-3 rounded">
+                        Centrado</div>
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"position-relative"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"position-absolute top-0 start-0"</span><span class="tag">&gt;</span>Arriba
+                izquierda<span class="tag">&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"position-absolute top-50 start-50 translate-middle"</span><span
+                    class="tag">&gt;</span>Centrado<span class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;/div&gt;</span>
+            </div>
+
+            <h5 class="mt-4">Position sticky</h5>
+            <div class="ejemplo-wrap">
+                <div style="height:80px;overflow-y:scroll;border:1px solid #ddd;">
+                    <div class="bg-light p-2">Texto antes del sticky</div>
+                    <div class="position-sticky top-0 bg-primary text-white p-2">.position-sticky .top-0</div>
+                    <div class="bg-light p-2" style="height:200px;">Texto después del sticky<br>Haz scroll para ver el
+                        efecto</div>
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"position-sticky
+                    top-0"</span><span class="tag">&gt;</span>Se pega al scroll<span class="tag">&lt;/div&gt;</span>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 8: RESPONSIVE                                           -->
+        <!-- ================================================================ -->
+        <section id="responsive" class="demo-box">
+            <h3 class="section-title">
+                <i class="bi bi-phone text-primary"></i> 8. Utilidades Responsivas
+            </h3>
+            <p class="text-muted">Las utilidades pueden cambiar según el tamaño de pantalla.</p>
+
+            <div class="descripcion">
+                <i class="bi bi-info-circle"></i>
+                <strong>{clase}-{breakpoint}-{valor}</strong> - Aplica solo a partir del breakpoint<br>
+                <i class="bi bi-info-circle"></i>
+                Breakpoints: <strong>sm</strong> (576px), <strong>md</strong> (768px), <strong>lg</strong> (992px),
+                <strong>xl</strong> (1200px)
+            </div>
+
+            <h5>Display responsivo</h5>
+            <div class="ejemplo-wrap">
+                <div class="bg-primary text-white p-2 d-block d-sm-none">.d-block .d-sm-none (Solo móvil)</div>
+                <div class="bg-success text-white p-2 d-none d-sm-block d-md-none">.d-none .d-sm-block .d-md-none (Solo
+                    tablet pequeña)</div>
+                <div class="bg-danger text-white p-2 d-none d-md-block">.d-none .d-md-block (Tablet y escritorio)</div>
+                <div class="bg-warning text-white p-2 d-none d-lg-block">.d-none .d-lg-block (Solo escritorio)</div>
+                <p class="mt-2 text-muted"><small>Redimensiona la ventana para ver los cambios</small></p>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="comment">&lt;!-- Visible solo en móvil --&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"d-block
+                    d-sm-none"</span><span class="tag">&gt;</span>Móvil<span class="tag">&lt;/div&gt;</span><br>
+                <span class="comment">&lt;!-- Visible en tablet y escritorio --&gt;</span><br>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"d-none
+                    d-md-block"</span><span class="tag">&gt;</span>Tablet+<span class="tag">&lt;/div&gt;</span>
+            </div>
+
+            <h5 class="mt-4">Margin y padding responsivo</h5>
+            <div class="ejemplo-wrap">
+                <div class="bg-primary text-white p-2 m-1 m-md-3 m-lg-5">
+                    .m-1 .m-md-3 .m-lg-5 (Margin cambia según pantalla)
+                </div>
+                <div class="bg-success text-white p-1 p-md-3 p-lg-5 mt-2">
+                    .p-1 .p-md-3 .p-lg-5 (Padding cambia según pantalla)
+                </div>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"m-1 m-md-3
+                    m-lg-5"</span><span class="tag">&gt;</span>Margin responsivo<span class="tag">&lt;/div&gt;</span>
+            </div>
+
+            <h5 class="mt-4">Flex responsivo</h5>
+            <div class="ejemplo-wrap">
+                <div class="d-flex flex-column flex-md-row gap-2 bg-light p-2">
+                    <div class="bg-primary text-white p-2">Item 1</div>
+                    <div class="bg-success text-white p-2">Item 2</div>
+                    <div class="bg-danger text-white p-2">Item 3</div>
+                </div>
+                <p class="mt-1"><small>.flex-column en móvil, .flex-md-row en tablet+</small></p>
+            </div>
+
+            <div class="code-label">CÓDIGO</div>
+            <div class="code-block">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"d-flex flex-column
+                    flex-md-row gap-2"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span
+                    class="value">"bg-primary p-2"</span><span class="tag">&gt;</span>Item 1<span
+                    class="tag">&lt;/div&gt;</span><br>
+                <span class="tag">&lt;/div&gt;</span>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- ACTIVIDAD PRÁCTICA                                              -->
+        <!-- ================================================================ -->
+
+        <!-- AGREGAR CODIGO UNA VEZ TERMINADA LA PRACTICA -->
+
+        <section class="demo-box bg-light">
+            <h3 class="section-title">
+                <i class="bi bi-pencil-square text-primary"></i> Actividad Práctica
+            </h3>
+            <p class="lead">Crea una tarjeta de perfil usando SOLO utilidades de Bootstrap</p>
+
+            <div class="descripcion">
+                <i class="bi bi-check-circle-fill text-success"></i>
+                <strong>Requisitos:</strong>
+                <ul class="mt-2 mb-0">
+                    <li>Avatar circular con sombra</li>
+                    <li>Nombre en negrita y color primario</li>
+                    <li>Descripción centrada y atenuada</li>
+                    <li>Habilidades como badges en lista horizontal</li>
+                    <li>Botón con ícono y estilo outline</li>
+                    <li>Borde redondeado con color primario</li>
+                    <li>Tarjeta centrada vertical y horizontalmente</li>
+                    <li>Responsive (adaptable a móvil)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- =========================================== -->
+        <!-- FOOTER                                     -->
+        <!-- =========================================== -->
+        <footer class="text-center py-4 mt-5 border-top">
+            <p class="text-muted">
+                <i class="bi bi-tools text-primary"></i>
+                Demostración de Utilidades de Bootstrap 5
+                <br>
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- ======================== -->
+    <!-- SCRIPTS                -->
+    <!-- ======================== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
