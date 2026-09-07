@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery - Eventos, Efectos, DOM y Ajax</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --code-bg: #1e1e1e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            padding-top: 70px;
+            background-color: #f8f9fa;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d1b2a 100%);
+            padding: 50px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(13, 110, 253, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .header-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .jquery-logo {
+            font-size: 3.5rem;
+            color: #0769ad;
+            background: rgba(255, 255, 255, 0.05);
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #0d6efd, #00d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .demo-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        
+        .demo-box h4 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .demo-box h4 i {
+            color: var(--primary);
+        }
+        
+        .code-block {
+            background: var(--code-bg);
+            color: #d4d4d4;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.82rem;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+        
+        .code-block .comment { color: #6a9955; }
+        .code-block .keyword { color: #c586c0; }
+        .code-block .string { color: #ce9178; }
+        .code-block .function { color: #dcdcaa; }
+        .code-block .variable { color: #9cdcfe; }
+        .code-block .number { color: #b5cea8; }
+        
+        .code-label {
+            display: inline-block;
+            background: #2d2d2d;
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 3px 12px;
+            border-radius: 4px 4px 0 0;
+            font-family: monospace;
+            margin-top: 15px;
+        }
+        
+        .caja-demo {
+            padding: 20px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            min-height: 120px;
+            transition: all 0.3s ease;
+        }
+        
+        .caja-demo .item-demo {
+            padding: 12px 16px;
+            background: #fff;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .caja-demo .item-demo .badge-id {
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: #6c757d;
+        }
+        
+        .caja-demo .item-demo.resaltado {
+            border-color: #0d6efd;
+            background: #e7f3ff;
+        }
+        
+        .caja-demo .item-demo.eliminado {
+            display: none;
+        }
+        
+        .resultado-box {
+            background: #e7f3ff;
+            border-left: 4px solid #0d6efd;
+            padding: 12px 18px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+        
+        .resultado-box .highlight {
+            color: #0d6efd;
+            font-weight: 700;
+        }
+        
+        .btn-demo {
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            padding: 6px 16px;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .btn-demo:hover {
+            transform: translateY(-2px);
+        }
+        
+        .ajax-result {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            min-height: 100px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .ajax-result .usuario-item {
+            padding: 10px 14px;
+            background: #fff;
+            border-radius: 8px;
+            border-left: 4px solid #0d6efd;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        
+        .ajax-result .usuario-item .nombre {
+            font-weight: 600;
+        }
+        
+        .ajax-result .usuario-item .email {
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+        
+        .spinner-carga {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #dee2e6;
+            border-top-color: #0d6efd;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .hover-demo {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hover-demo:hover {
+            border-color: #0d6efd;
+        }
+        
+        .hover-demo.activo {
+            border-color: #198754;
+            background: #d1e7dd;
+        }
+        
+        .hover-demo.inactivo {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+        
+        /* Contenedor de animaciones */
+        .anim-container {
+            position: relative;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px dashed #dee2e6;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .anim-container .caja-anim {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+            transition: none;
+        }
+        
+        .anim-container .caja-anim i {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        
+        .anim-container .caja-anim small {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header-section { padding: 30px 0 40px; }
+            .header-section h1 { font-size: 2rem !important; }
+            .demo-box { padding: 18px; }
+            .anim-container .caja-anim {
+                width: 80px;
+                height: 80px;
+            }
+            .anim-container .caja-anim i {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- NAVBAR                                      -->
+    <!-- ============================================ -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <span style="color: #0769ad;">j</span>Query
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#eventos">Eventos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#efectos">Efectos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#dom">DOM</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ajax">Ajax</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- 2.3. MANEJO DE EVENTOS                      -->
+    <!-- ============================================ -->
+    <section id="eventos" class="py-4">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold display-6">2.3. <span class="text-primary">Manejo de Eventos</span></h2>
+                <p class="text-muted">Click, hover, focus, keyup, submit y mas</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Click -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-hand-index-thumb me-2"></i> Evento Click</h4>
+                        <p class="text-muted small">Se dispara al hacer clic.</p>
+                        
+                        <button class="btn btn-primary btn-demo mb-3" id="btnClickDemo">
+                            <i class="bi bi-hand-index"></i> Haz clic aqui
+                        </button>
+                        <div class="resultado-box" id="resultadoClick">
+                            <i class="bi bi-info-circle text-primary me-1"></i>
+                            Esperando clic...
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// Evento click</span><br>
+                            <span class="variable">$</span>(<span class="string">'#btnClickDemo'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#resultadoClick'</span>).<span class="function">html</span>(<span class="string">'Clic detectado'</span>);<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hover -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-arrows-move me-2"></i> Evento Hover</h4>
+                        <p class="text-muted small">Se dispara al entrar y salir con el mouse.</p>
+                        
+                        <div class="hover-demo" id="hoverDemo">
+                            <p class="mb-0" id="hoverTexto">Pasa el mouse aqui</p>
+                        </div>
+                        <div class="resultado-box mt-3" id="resultadoHover">
+                            <i class="bi bi-info-circle text-primary me-1"></i>
+                            Esperando hover...
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// Evento hover</span><br>
+                            <span class="variable">$</span>(<span class="string">'#hoverDemo'</span>).<span class="function">hover</span>(<br>
+                            &nbsp;&nbsp;<span class="keyword">function</span>() { <span class="comment">// mouseenter</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#hoverTexto'</span>).<span class="function">text</span>(<span class="string">'Dentro!'</span>);<br>
+                            &nbsp;&nbsp;},<br>
+                            &nbsp;&nbsp;<span class="keyword">function</span>() { <span class="comment">// mouseleave</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#hoverTexto'</span>).<span class="function">text</span>(<span class="string">'Has salido'</span>);<br>
+                            &nbsp;&nbsp;}<br>
+                            );
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Focus / Blur -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-input-cursor me-2"></i> Focus / Blur</h4>
+                        <p class="text-muted small">Se disparan al enfocar y desenfocar un input.</p>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nombre:</label>
+                            <input type="text" class="form-control" id="inputFocus" placeholder="Escribe tu nombre...">
+                            <div class="resultado-box mt-3" id="resultadoFocus">
+                                <i class="bi bi-info-circle text-primary me-1"></i>
+                                Enfoca el input...
+                            </div>
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// Eventos focus / blur</span><br>
+                            <span class="variable">$</span>(<span class="string">'#inputFocus'</span>).<span class="function">on</span>(<span class="string">'focus'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#resultadoFocus'</span>).<span class="function">html</span>(<span class="string">'Input enfocado'</span>);<br>
+                            }).<span class="function">on</span>(<span class="string">'blur'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="keyword">const</span> <span class="variable">valor</span> = <span class="variable">$</span>(<span class="keyword">this</span>).<span class="function">val</span>() || <span class="string">'vacio'</span>;<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#resultadoFocus'</span>).<span class="function">html</span>(<span class="string">'Valor: '</span> + <span class="variable">valor</span>);<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keyup -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-keyboard me-2"></i> Evento Keyup</h4>
+                        <p class="text-muted small">Se dispara al soltar una tecla.</p>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Buscar:</label>
+                            <input type="text" class="form-control" id="inputKeyup" placeholder="Escribe para buscar...">
+                            <div class="resultado-box mt-3" id="resultadoKeyup">
+                                <i class="bi bi-info-circle text-primary me-1"></i>
+                                Escribe algo...
+                            </div>
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// Evento keyup</span><br>
+                            <span class="variable">$</span>(<span class="string">'#inputKeyup'</span>).<span class="function">on</span>(<span class="string">'keyup'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="keyword">const</span> <span class="variable">texto</span> = <span class="variable">$</span>(<span class="keyword">this</span>).<span class="function">val</span>();<br>
+                            &nbsp;&nbsp;<span class="keyword">const</span> <span class="variable">cantidad</span> = <span class="variable">texto</span>.<span class="function">length</span>;<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#resultadoKeyup'</span>).<span class="function">html</span>(<span class="string">'Texto: "'</span> + <span class="variable">texto</span> + <span class="string">'" — '</span> + <span class="variable">cantidad</span> + <span class="string">' caracteres'</span>);<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="col-lg-12">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-send me-2"></i> Evento Submit</h4>
+                        <p class="text-muted small">Se dispara al enviar un formulario.</p>
+                        
+                        <form id="formSubmit" class="row g-3">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="submitNombre" placeholder="Nombre" required>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="email" class="form-control" id="submitEmail" placeholder="Email" required>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-success btn-demo w-100">
+                                    <i class="bi bi-send"></i> Enviar
+                                </button>
+                            </div>
+                        </form>
+                        <div class="resultado-box mt-3" id="resultadoSubmit">
+                            <i class="bi bi-info-circle text-primary me-1"></i>
+                            Completa el formulario y envia...
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// Evento submit</span><br>
+                            <span class="variable">$</span>(<span class="string">'#formSubmit'</span>).<span class="function">on</span>(<span class="string">'submit'</span>, <span class="keyword">function</span>(<span class="variable">e</span>) {<br>
+                            &nbsp;&nbsp;<span class="variable">e</span>.<span class="function">preventDefault</span>();<br>
+                            &nbsp;&nbsp;<span class="keyword">const</span> <span class="variable">nombre</span> = <span class="variable">$</span>(<span class="string">'#submitNombre'</span>).<span class="function">val</span>();<br>
+                            &nbsp;&nbsp;<span class="keyword">const</span> <span class="variable">email</span> = <span class="variable">$</span>(<span class="string">'#submitEmail'</span>).<span class="function">val</span>();<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#resultadoSubmit'</span>).<span class="function">html</span>(<span class="string">'Formulario enviado por '</span> + <span class="variable">nombre</span> + <span class="string">' ('</span> + <span class="variable">email</span> + <span class="string">')'</span>);<br>
+                            &nbsp;&nbsp;<span class="keyword">this</span>.<span class="function">reset</span>();<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 2.4. EFECTOS                                -->
+    <!-- ============================================ -->
+    <section id="efectos" class="py-4 bg-light">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold display-6">2.4. <span class="text-primary">Efectos</span></h2>
+                <p class="text-muted">Fade, Slide y animaciones personalizadas</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Fade -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-eye-slash me-2"></i> Efectos Fade</h4>
+                        <p class="text-muted small">Desvanecimiento suave de elementos.</p>
+                        
+                        <div class="caja-demo text-center p-4" style="min-height:100px;">
+                            <div class="bg-primary text-white p-4 rounded-3" id="cajaFade">
+                                <i class="bi bi-box fs-1 d-block"></i>
+                                <strong>Elemento con fade</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-2 flex-wrap mt-3">
+                            <button class="btn btn-success btn-demo" id="btnFadeIn">
+                                <i class="bi bi-eye"></i> Fade In
+                            </button>
+                            <button class="btn btn-danger btn-demo" id="btnFadeOut">
+                                <i class="bi bi-eye-slash"></i> Fade Out
+                            </button>
+                            <button class="btn btn-warning btn-demo" id="btnFadeToggle">
+                                <i class="bi bi-arrows-expand"></i> Fade Toggle
+                            </button>
+                            <button class="btn btn-info btn-demo" id="btnFadeTo">
+                                <i class="bi bi-dash-circle"></i> Fade To 50%
+                            </button>
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// Efectos Fade</span><br>
+                            <span class="variable">$</span>(<span class="string">'#btnFadeIn'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaFade'</span>).<span class="function">fadeIn</span>(<span class="number">600</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnFadeOut'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaFade'</span>).<span class="function">fadeOut</span>(<span class="number">600</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnFadeToggle'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaFade'</span>).<span class="function">fadeToggle</span>(<span class="number">600</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnFadeTo'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaFade'</span>).<span class="function">fadeTo</span>(<span class="number">400</span>, <span class="number">0.5</span>);<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-arrows-collapse me-2"></i> Efectos Slide</h4>
+                        <p class="text-muted small">Deslizamiento vertical de elementos.</p>
+                        
+                        <div class="caja-demo text-center p-4" style="min-height:100px;">
+                            <div class="bg-success text-white p-4 rounded-3" id="cajaSlide">
+                                <i class="bi bi-layers fs-1 d-block"></i>
+                                <strong>Elemento con slide</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-2 flex-wrap mt-3">
+                            <button class="btn btn-success btn-demo" id="btnSlideDown">
+                                <i class="bi bi-arrow-down"></i> Slide Down
+                            </button>
+                            <button class="btn btn-danger btn-demo" id="btnSlideUp">
+                                <i class="bi bi-arrow-up"></i> Slide Up
+                            </button>
+                            <button class="btn btn-warning btn-demo" id="btnSlideToggle">
+                                <i class="bi bi-arrows-expand"></i> Slide Toggle
+                            </button>
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// Efectos Slide</span><br>
+                            <span class="variable">$</span>(<span class="string">'#btnSlideDown'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaSlide'</span>).<span class="function">slideDown</span>(<span class="number">500</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnSlideUp'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaSlide'</span>).<span class="function">slideUp</span>(<span class="number">500</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnSlideToggle'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaSlide'</span>).<span class="function">slideToggle</span>(<span class="number">500</span>);<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animate (corregido) -->
+                <div class="col-lg-12">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-magic me-2"></i> Animaciones con <code>.animate()</code></h4>
+                        <p class="text-muted small">Crea animaciones personalizadas con propiedades CSS.</p>
+                        
+                        <div class="anim-container" id="animContainer">
+                            <div class="caja-anim" id="cajaAnimate">
+                                <i class="bi bi-arrows-move"></i>
+                                <small>Mover</small>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-2 flex-wrap mt-3">
+                            <button class="btn btn-primary btn-demo" id="btnAnimMove">
+                                <i class="bi bi-arrow-right"></i> Mover
+                            </button>
+                            <button class="btn btn-primary btn-demo" id="btnAnimSize">
+                                <i class="bi bi-arrows-expand"></i> Agrandar
+                            </button>
+                            <button class="btn btn-primary btn-demo" id="btnAnimRotate">
+                                <i class="bi bi-arrow-repeat"></i> Opacidad
+                            </button>
+                            <button class="btn btn-secondary btn-demo" id="btnAnimReset">
+                                <i class="bi bi-arrow-counterclockwise"></i> Reset
+                            </button>
+                        </div>
+                        <div class="resultado-box mt-3" id="resultadoAnim">
+                            <i class="bi bi-info-circle text-primary me-1"></i>
+                            Haz clic en un boton para ver la animacion
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// Animaciones personalizadas con .animate()</span><br>
+                            <span class="variable">$</span>(<span class="string">'#btnAnimMove'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaAnimate'</span>).<span class="function">animate</span>({ <span class="variable">marginLeft</span>: <span class="string">'150px'</span> }, <span class="number">600</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnAnimSize'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaAnimate'</span>).<span class="function">animate</span>({<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">width</span>: <span class="string">'180px'</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">height</span>: <span class="string">'180px'</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">borderRadius</span>: <span class="string">'50%'</span><br>
+                            &nbsp;&nbsp;}, <span class="number">600</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnAnimRotate'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaAnimate'</span>).<span class="function">animate</span>({ <span class="variable">opacity</span>: <span class="number">0.2</span> }, <span class="number">300</span>)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;.<span class="function">animate</span>({ <span class="variable">opacity</span>: <span class="number">1</span> }, <span class="number">300</span>);<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 2.5. MANIPULACION DEL DOM                   -->
+    <!-- ============================================ -->
+    <section id="dom" class="py-4">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold display-6">2.5. <span class="text-primary">Manipulacion del DOM</span></h2>
+                <p class="text-muted">Agregar, eliminar, modificar y clonar elementos</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- html / text -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-pencil me-2"></i> <code>.html()</code> y <code>.text()</code></h4>
+                        <p class="text-muted small">Modificar el contenido HTML o texto de un elemento.</p>
+                        
+                        <div class="caja-demo p-3" id="cajaHtml">
+                            <p class="mb-0" id="textoHtml">Contenido original</p>
+                        </div>
+                        
+                        <div class="d-flex gap-2 flex-wrap mt-3">
+                            <button class="btn btn-primary btn-demo" id="btnCambiarHtml">
+                                <i class="bi bi-code"></i> Cambiar HTML
+                            </button>
+                            <button class="btn btn-success btn-demo" id="btnCambiarTexto">
+                                <i class="bi bi-fonts"></i> Cambiar Texto
+                            </button>
+                            <button class="btn btn-warning btn-demo" id="btnObtenerHtml">
+                                <i class="bi bi-eye"></i> Mostrar HTML
+                            </button>
+                        </div>
+                        <div class="resultado-box mt-3" id="resultadoHtml">
+                            <i class="bi bi-info-circle text-primary me-1"></i>
+                            Haz clic en un boton...
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// .html() y .text()</span><br>
+                            <span class="variable">$</span>(<span class="string">'#btnCambiarHtml'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#textoHtml'</span>).<span class="function">html</span>(<span class="string">'&lt;strong&gt;HTML&lt;/strong&gt; &lt;em&gt;modificado&lt;/em&gt;'</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnCambiarTexto'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#textoHtml'</span>).<span class="function">text</span>(<span class="string">'Texto plano modificado'</span>);<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+
+                <!-- append / prepend -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-plus-circle me-2"></i> <code>.append()</code> y <code>.prepend()</code></h4>
+                        <p class="text-muted small">Agregar elementos al final o al inicio.</p>
+                        
+                        <div class="caja-demo p-3" id="cajaAppend">
+                            <div class="item-demo">Elemento existente 1</div>
+                            <div class="item-demo">Elemento existente 2</div>
+                        </div>
+                        
+                        <div class="d-flex gap-2 flex-wrap mt-3">
+                            <button class="btn btn-success btn-demo" id="btnAppend">
+                                <i class="bi bi-plus-circle"></i> Append
+                            </button>
+                            <button class="btn btn-primary btn-demo" id="btnPrepend">
+                                <i class="bi bi-plus-circle-fill"></i> Prepend
+                            </button>
+                            <button class="btn btn-danger btn-demo" id="btnRemoveLast">
+                                <i class="bi bi-dash-circle"></i> Quitar ultimo
+                            </button>
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// .append() y .prepend()</span><br>
+                            <span class="variable">$</span>(<span class="string">'#btnAppend'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaAppend'</span>).<span class="function">append</span>(<span class="string">'&lt;div class="item-demo"&gt;Nuevo al final&lt;/div&gt;'</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnPrepend'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaAppend'</span>).<span class="function">prepend</span>(<span class="string">'&lt;div class="item-demo"&gt;Nuevo al inicio&lt;/div&gt;'</span>);<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+
+                <!-- add / remove / toggle class -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-tags me-2"></i> <code>.addClass()</code>, <code>.removeClass()</code>, <code>.toggleClass()</code></h4>
+                        <p class="text-muted small">Agregar, quitar o alternar clases CSS.</p>
+                        
+                        <div class="caja-demo p-3" id="cajaClases">
+                            <div class="item-demo" id="itemClases">Elemento para clases</div>
+                        </div>
+                        
+                        <div class="d-flex gap-2 flex-wrap mt-3">
+                            <button class="btn btn-primary btn-demo" id="btnAddClass">
+                                <i class="bi bi-plus-tag"></i> Add Class
+                            </button>
+                            <button class="btn btn-danger btn-demo" id="btnRemoveClass">
+                                <i class="bi bi-dash-tag"></i> Remove Class
+                            </button>
+                            <button class="btn btn-warning btn-demo" id="btnToggleClass">
+                                <i class="bi bi-arrows-expand"></i> Toggle Class
+                            </button>
+                        </div>
+                        <div class="resultado-box mt-3" id="resultadoClases">
+                            <i class="bi bi-info-circle text-primary me-1"></i>
+                            Clases actuales: <span class="highlight" id="clasesActuales">item-demo</span>
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// .addClass(), .removeClass(), .toggleClass()</span><br>
+                            <span class="variable">$</span>(<span class="string">'#btnAddClass'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#itemClases'</span>).<span class="function">addClass</span>(<span class="string">'resaltado'</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnRemoveClass'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#itemClases'</span>).<span class="function">removeClass</span>(<span class="string">'resaltado'</span>);<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnToggleClass'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#itemClases'</span>).<span class="function">toggleClass</span>(<span class="string">'resaltado'</span>);<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+
+                <!-- remove / empty / clone -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-trash me-2"></i> <code>.remove()</code>, <code>.empty()</code>, <code>.clone()</code></h4>
+                        <p class="text-muted small">Eliminar, vaciar o clonar elementos.</p>
+                        
+                        <div class="caja-demo p-3" id="cajaRemove">
+                            <div class="item-demo" id="itemRemove1">Elemento 1 <span class="badge bg-secondary">remove</span></div>
+                            <div class="item-demo" id="itemRemove2">Elemento 2 <span class="badge bg-secondary">remove</span></div>
+                            <div class="item-demo" id="itemRemove3">Elemento 3 <span class="badge bg-secondary">remove</span></div>
+                        </div>
+                        
+                        <div class="d-flex gap-2 flex-wrap mt-3">
+                            <button class="btn btn-danger btn-demo" id="btnRemoveFirst">
+                                <i class="bi bi-trash"></i> Quitar 1ro
+                            </button>
+                            <button class="btn btn-warning btn-demo" id="btnEmpty">
+                                <i class="bi bi-eraser"></i> Vaciar todo
+                            </button>
+                            <button class="btn btn-success btn-demo" id="btnClone">
+                                <i class="bi bi-copy"></i> Clonar
+                            </button>
+                            <button class="btn btn-secondary btn-demo" id="btnResetRemove">
+                                <i class="bi bi-arrow-counterclockwise"></i> Reset
+                            </button>
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// .remove(), .empty(), .clone()</span><br>
+                            <span class="variable">$</span>(<span class="string">'#btnRemoveFirst'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaRemove .item-demo:first'</span>).<span class="function">remove</span>();<br>
+                            });<br>
+                            <span class="variable">$</span>(<span class="string">'#btnClone'</span>).<span class="function">on</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;<span class="keyword">const</span> <span class="variable">$clone</span> = <span class="variable">$</span>(<span class="string">'#cajaRemove .item-demo:first'</span>).<span class="function">clone</span>();<br>
+                            &nbsp;&nbsp;<span class="variable">$</span>(<span class="string">'#cajaRemove'</span>).<span class="function">append</span>(<span class="variable">$clone</span>);<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 2.6. AJAX                                   -->
+    <!-- ============================================ -->
+    <section id="ajax" class="py-4 bg-light">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold display-6">2.6. <span class="text-primary">Ajax</span></h2>
+                <p class="text-muted">Peticiones HTTP con <code>$.ajax()</code>, <code>$.get()</code>, <code>$.post()</code> y <code>$.getJSON()</code></p>
+            </div>
+
+            <div class="row g-4">
+                <!-- $.ajax() -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-cloud-arrow-up me-2"></i> <code>$.ajax()</code></h4>
+                        <p class="text-muted small">Metodo completo para peticiones HTTP.</p>
+                        
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <button class="btn btn-primary btn-demo" id="btnAjaxGet">
+                                <i class="bi bi-download"></i> GET (JSON)
+                            </button>
+                            <button class="btn btn-success btn-demo" id="btnAjaxPost">
+                                <i class="bi bi-upload"></i> POST (Simular)
+                            </button>
+                            <button class="btn btn-danger btn-demo" id="btnAjaxError">
+                                <i class="bi bi-exclamation-triangle"></i> Error
+                            </button>
+                        </div>
+                        
+                        <div class="ajax-result" id="resultadoAjax">
+                            <p class="text-muted text-center mb-0">
+                                <i class="bi bi-cloud"></i> Haz clic en un boton...
+                            </p>
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// $.ajax()</span><br>
+                            <span class="variable">$</span>.<span class="function">ajax</span>({<br>
+                            &nbsp;&nbsp;<span class="variable">url</span>: <span class="string">'https://jsonplaceholder.typicode.com/users'</span>,<br>
+                            &nbsp;&nbsp;<span class="variable">method</span>: <span class="string">'GET'</span>,<br>
+                            &nbsp;&nbsp;<span class="variable">success</span>: <span class="keyword">function</span>(<span class="variable">data</span>) { <span class="comment">// Procesar datos</span> },<br>
+                            &nbsp;&nbsp;<span class="variable">error</span>: <span class="keyword">function</span>(<span class="variable">xhr</span>) { <span class="comment">// Manejar error</span> }<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+
+                <!-- $.get() / $.post() / $.getJSON() -->
+                <div class="col-lg-6">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-cloud-download me-2"></i> <code>$.get()</code> · <code>$.post()</code> · <code>$.getJSON()</code></h4>
+                        <p class="text-muted small">Metodos abreviados para peticiones comunes.</p>
+                        
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <button class="btn btn-info btn-demo" id="btnGetJSON">
+                                <i class="bi bi-filetype-json"></i> $.getJSON()
+                            </button>
+                            <button class="btn btn-primary btn-demo" id="btnGet">
+                                <i class="bi bi-download"></i> $.get()
+                            </button>
+                            <button class="btn btn-success btn-demo" id="btnPost">
+                                <i class="bi bi-upload"></i> $.post()
+                            </button>
+                            <button class="btn btn-secondary btn-demo" id="btnAjaxLimpiar">
+                                <i class="bi bi-eraser"></i> Limpiar
+                            </button>
+                        </div>
+                        
+                        <div class="ajax-result" id="resultadoAjaxSimple">
+                            <p class="text-muted text-center mb-0">
+                                <i class="bi bi-cloud"></i> Haz clic en un boton...
+                            </p>
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// $.getJSON()</span><br>
+                            <span class="variable">$</span>.<span class="function">getJSON</span>(<span class="string">'https://jsonplaceholder.typicode.com/users/1'</span>, <span class="keyword">function</span>(<span class="variable">data</span>) {<br>
+                            &nbsp;&nbsp;<span class="comment">// Procesar datos</span><br>
+                            });<br><br>
+                            <span class="comment">// $.post()</span><br>
+                            <span class="variable">$</span>.<span class="function">post</span>(<span class="string">'https://jsonplaceholder.typicode.com/users'</span>,<br>
+                            &nbsp;&nbsp;{ <span class="variable">nombre</span>: <span class="string">'Juan'</span>, <span class="variable">email</span>: <span class="string">'juan@email.com'</span> },<br>
+                            &nbsp;&nbsp;<span class="keyword">function</span>(<span class="variable">data</span>) { <span class="comment">// Procesar respuesta</span> }<br>
+                            );
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loader y error -->
+                <div class="col-lg-12">
+                    <div class="demo-box">
+                        <h4><i class="bi bi-arrow-repeat me-2"></i> Estado de carga y manejo de errores</h4>
+                        <p class="text-muted small">Mostrar indicador de carga y manejar errores.</p>
+                        
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <button class="btn btn-primary btn-demo" id="btnAjaxLoader">
+                                <i class="bi bi-hourglass-split"></i> Cargar con loader
+                            </button>
+                            <button class="btn btn-danger btn-demo" id="btnAjaxErrorHandler">
+                                <i class="bi bi-exclamation-triangle"></i> Simular error
+                            </button>
+                        </div>
+                        
+                        <div class="ajax-result" id="resultadoLoader">
+                            <p class="text-muted text-center mb-0" id="loaderStatus">
+                                <i class="bi bi-cloud"></i> Esperando accion...
+                            </p>
+                        </div>
+                        
+                        <div class="code-label">CODIGO</div>
+                        <div class="code-block">
+                            <span class="comment">// Loader y manejo de errores</span><br>
+                            <span class="variable">$</span>(<span class="string">'#loaderStatus'</span>).<span class="function">html</span>(<span class="string">'&lt;div class="spinner-carga d-block mx-auto mb-2"&gt;&lt;/div&gt; Cargando...'</span>);<br>
+                            <span class="variable">$</span>.<span class="function">ajax</span>({<br>
+                            &nbsp;&nbsp;<span class="variable">url</span>: <span class="string">'...'</span>,<br>
+                            &nbsp;&nbsp;<span class="variable">success</span>: <span class="keyword">function</span>(<span class="variable">data</span>) { <span class="comment">// Procesar</span> },<br>
+                            &nbsp;&nbsp;<span class="variable">error</span>: <span class="keyword">function</span>(<span class="variable">xhr</span>) { <span class="comment">// Mostrar error</span> }<br>
+                            });
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="bg-dark text-white-50 py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <small>
+                        <span style="color: #0769ad;">j</span>Query - Eventos · Efectos · DOM · Ajax
+                    </small>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <small>
+                        <i class="bi bi-code-slash text-primary me-1"></i>
+                        Hecho con <i class="bi bi-heart-fill text-danger"></i> para aprender
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                     -->
+    <!-- ============================================ -->
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <script>
+        $(function() {
+            
+            console.log('jQuery Avanzado - Cargado');
+            console.log('Version:', $.fn.jquery);
+            
+            /* ============================================ */
+            /* 2.3. MANEJO DE EVENTOS                      */
+            /* ============================================ */
+            
+            // Click
+            $('#btnClickDemo').on('click', function() {
+                var $resultado = $('#resultadoClick');
+                $resultado.html('<i class="bi bi-check-circle text-success me-1"></i> Clic detectado');
+                setTimeout(function() {
+                    $resultado.html('<i class="bi bi-info-circle text-primary me-1"></i> Esperando clic...');
+                }, 1500);
+            });
+            
+            // Hover
+            $('#hoverDemo').hover(
+                function() {
+                    $(this).addClass('activo').removeClass('inactivo');
+                    $('#hoverTexto').text('Dentro!');
+                    $('#resultadoHover').html('<i class="bi bi-check-circle text-success me-1"></i> mouseenter - Has entrado');
+                },
+                function() {
+                    $(this).removeClass('activo').addClass('inactivo');
+                    $('#hoverTexto').text('Pasa el mouse aqui');
+                    $('#resultadoHover').html('<i class="bi bi-x-circle text-danger me-1"></i> mouseleave - Has salido');
+                }
+            );
+            
+            // Focus / Blur
+            $('#inputFocus').on('focus', function() {
+                $('#resultadoFocus').html('<i class="bi bi-check-circle text-success me-1"></i> Input enfocado');
+            }).on('blur', function() {
+                var valor = $(this).val() || 'vacio';
+                $('#resultadoFocus').html('<i class="bi bi-pencil text-primary me-1"></i> Valor: <strong>"' + valor + '"</strong>');
+            });
+            
+            // Keyup
+            $('#inputKeyup').on('keyup', function() {
+                var texto = $(this).val();
+                var cantidad = texto.length;
+                $('#resultadoKeyup').html(
+                    '<i class="bi bi-keyboard text-primary me-1"></i> ' +
+                    'Texto: "<strong>' + texto + '"</strong> — ' + cantidad + ' caracteres'
+                );
+            });
+            
+            // Submit
+            $('#formSubmit').on('submit', function(e) {
+                e.preventDefault();
+                var nombre = $('#submitNombre').val();
+                var email = $('#submitEmail').val();
+                if (nombre && email) {
+                    $('#resultadoSubmit').html(
+                        '<i class="bi bi-check-circle text-success me-1"></i> ' +
+                        'Formulario enviado por <strong>' + nombre + '</strong> (' + email + ')'
+                    );
+                    this.reset();
+                }
+            });
+            
+            /* ============================================ */
+            /* 2.4. EFECTOS                                */
+            /* ============================================ */
+            
+            // Fade
+            $('#btnFadeIn').on('click', function() {
+                $('#cajaFade').fadeIn(600);
+            });
+            $('#btnFadeOut').on('click', function() {
+                $('#cajaFade').fadeOut(600);
+            });
+            $('#btnFadeToggle').on('click', function() {
+                $('#cajaFade').fadeToggle(600);
+            });
+            $('#btnFadeTo').on('click', function() {
+                $('#cajaFade').fadeTo(400, 0.5);
+                setTimeout(function() {
+                    $('#cajaFade').fadeTo(400, 1);
+                }, 1500);
+            });
+            
+            // Slide
+            $('#btnSlideDown').on('click', function() {
+                $('#cajaSlide').slideDown(500);
+            });
+            $('#btnSlideUp').on('click', function() {
+                $('#cajaSlide').slideUp(500);
+            });
+            $('#btnSlideToggle').on('click', function() {
+                $('#cajaSlide').slideToggle(500);
+            });
+            
+            
+            function resetAnimacion() {
+                $('#cajaAnimate').stop(true, true).css({
+                    marginLeft: '0px',
+                    width: '120px',
+                    height: '120px',
+                    borderRadius: '12px',
+                    opacity: 1,
+                    backgroundColor: '#dc3545'
+                });
+                $('#resultadoAnim').html(
+                    '<i class="bi bi-info-circle text-primary me-1"></i> Estado restablecido'
+                );
+            }
+            
+            $('#btnAnimMove').on('click', function() {
+                var $caja = $('#cajaAnimate');
+                var currentLeft = parseInt($caja.css('margin-left')) || 0;
+                var newLeft = currentLeft + 120;
+                if (newLeft > 300) newLeft = 0;
+                $caja.stop(true, true).animate({ marginLeft: newLeft + 'px' }, 500);
+                $('#resultadoAnim').html(
+                    '<i class="bi bi-arrow-right text-primary me-1"></i> Moviendo a la derecha...'
+                );
+            });
+            
+            $('#btnAnimSize').on('click', function() {
+                var $caja = $('#cajaAnimate');
+                var currentWidth = $caja.width();
+                var newWidth = currentWidth === 120 ? 180 : 120;
+                var newHeight = currentWidth === 120 ? 180 : 120;
+                var newRadius = currentWidth === 120 ? '50%' : '12px';
+                $caja.stop(true, true).animate({
+                    width: newWidth + 'px',
+                    height: newHeight + 'px',
+                    borderRadius: newRadius
+                }, 600);
+                $('#resultadoAnim').html(
+                    '<i class="bi bi-arrows-expand text-primary me-1"></i> Cambiando tamaño...'
+                );
+            });
+            
+            $('#btnAnimRotate').on('click', function() {
+                $('#cajaAnimate').stop(true, true).animate({ opacity: 0.2 }, 300)
+                    .animate({ opacity: 1 }, 300);
+                $('#resultadoAnim').html(
+                    '<i class="bi bi-arrow-repeat text-primary me-1"></i> Efecto de parpadeo...'
+                );
+            });
+            
+            $('#btnAnimReset').on('click', function() {
+                resetAnimacion();
+            });
+            
+            /* ============================================ */
+            /* 2.5. MANIPULACION DEL DOM                   */
+            /* ============================================ */
+            
+            // html / text
+            $('#btnCambiarHtml').on('click', function() {
+                $('#textoHtml').html('<strong>HTML</strong> <em>modificado</em>');
+                $('#resultadoHtml').html('<i class="bi bi-code text-primary me-1"></i> HTML cambiado');
+            });
+            $('#btnCambiarTexto').on('click', function() {
+                $('#textoHtml').text('Texto plano modificado');
+                $('#resultadoHtml').html('<i class="bi bi-fonts text-primary me-1"></i> Texto cambiado');
+            });
+            $('#btnObtenerHtml').on('click', function() {
+                var html = $('#textoHtml').html();
+                $('#resultadoHtml').html('<i class="bi bi-eye text-primary me-1"></i> HTML actual: <code>' + html + '</code>');
+            });
+            
+            // append / prepend
+            var contadorAppend = 0;
+            $('#btnAppend').on('click', function() {
+                contadorAppend++;
+                $('#cajaAppend').append(
+                    '<div class="item-demo">Nuevo #' + contadorAppend + ' (final)</div>'
+                );
+            });
+            $('#btnPrepend').on('click', function() {
+                contadorAppend++;
+                $('#cajaAppend').prepend(
+                    '<div class="item-demo">Nuevo #' + contadorAppend + ' (inicio)</div>'
+                );
+            });
+            $('#btnRemoveLast').on('click', function() {
+                $('#cajaAppend .item-demo:last').remove();
+            });
+            
+            // add / remove / toggle class
+            function actualizarClases() {
+                var clases = $('#itemClases').attr('class') || '';
+                $('#clasesActuales').text(clases);
+            }
+            actualizarClases();
+            
+            $('#btnAddClass').on('click', function() {
+                $('#itemClases').addClass('resaltado');
+                actualizarClases();
+            });
+            $('#btnRemoveClass').on('click', function() {
+                $('#itemClases').removeClass('resaltado');
+                actualizarClases();
+            });
+            $('#btnToggleClass').on('click', function() {
+                $('#itemClases').toggleClass('resaltado');
+                actualizarClases();
+            });
+            
+            // remove / empty / clone
+            $('#btnRemoveFirst').on('click', function() {
+                $('#cajaRemove .item-demo:first').fadeOut(300, function() {
+                    $(this).remove();
+                });
+            });
+            $('#btnEmpty').on('click', function() {
+                if (confirm('Vaciar todos los elementos?')) {
+                    $('#cajaRemove').empty();
+                }
+            });
+            $('#btnClone').on('click', function() {
+                var $first = $('#cajaRemove .item-demo:first');
+                if ($first.length) {
+                    var $clone = $first.clone().css('opacity', 0.5).animate({ opacity: 1 }, 500);
+                    $('#cajaRemove').append($clone);
+                }
+            });
+            $('#btnResetRemove').on('click', function() {
+                $('#cajaRemove').html(`
+                    <div class="item-demo" id="itemRemove1">Elemento 1 <span class="badge bg-secondary">remove</span></div>
+                    <div class="item-demo" id="itemRemove2">Elemento 2 <span class="badge bg-secondary">remove</span></div>
+                    <div class="item-demo" id="itemRemove3">Elemento 3 <span class="badge bg-secondary">remove</span></div>
+                `);
+            });
+            
+            /* ============================================ */
+            /* 2.6. AJAX                                   */
+            /* ============================================ */
+            
+            function mostrarUsuarios(data, $container) {
+                var html = '';
+                var limit = data.length > 5 ? 5 : data.length;
+                for (var i = 0; i < limit; i++) {
+                    html += '<div class="usuario-item">';
+                    html += '  <div class="nombre"><i class="bi bi-person-circle text-primary"></i> ' + data[i].name + '</div>';
+                    html += '  <div class="email"><i class="bi bi-envelope"></i> ' + data[i].email + '</div>';
+                    html += '  <div class="small text-muted"><i class="bi bi-building"></i> ' + (data[i].company ? data[i].company.name : '') + '</div>';
+                    html += '</div>';
+                }
+                $container.html(html);
+            }
+            
+            // $.ajax() - GET
+            $('#btnAjaxGet').on('click', function() {
+                var $container = $('#resultadoAjax');
+                $container.html('<div class="text-center"><div class="spinner-carga"></div><p class="text-muted mt-2">Cargando usuarios...</p></div>');
+                
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/users',
+                    method: 'GET',
+                    success: function(data) {
+                        mostrarUsuarios(data, $container);
+                    },
+                    error: function(xhr) {
+                        $container.html('<div class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Error: ' + xhr.status + ' - ' + xhr.statusText + '</div>');
+                    }
+                });
+            });
+            
+            // $.ajax() - POST
+            $('#btnAjaxPost').on('click', function() {
+                var $container = $('#resultadoAjax');
+                $container.html('<div class="text-center"><div class="spinner-carga"></div><p class="text-muted mt-2">Enviando datos...</p></div>');
+                
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/users',
+                    method: 'POST',
+                    data: {
+                        name: 'Nuevo Usuario',
+                        email: 'nuevo@email.com'
+                    },
+                    success: function(data) {
+                        $container.html(`
+                            <div class="usuario-item" style="border-left-color: #198754;">
+                                <div class="nombre"><i class="bi bi-check-circle text-success"></i> Usuario creado</div>
+                                <div class="email">ID: ${data.id} - ${data.name}</div>
+                                <div class="small text-muted">Email: ${data.email}</div>
+                            </div>
+                            <p class="text-muted small mt-2"><i class="bi bi-info-circle"></i> POST simulado correctamente</p>
+                        `);
+                    },
+                    error: function(xhr) {
+                        $container.html('<div class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Error: ' + xhr.status + ' - ' + xhr.statusText + '</div>');
+                    }
+                });
+            });
+            
+            // $.ajax() - Error
+            $('#btnAjaxError').on('click', function() {
+                var $container = $('#resultadoAjax');
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/usuarios-invalidos',
+                    method: 'GET',
+                    success: function() {
+                        $container.html('<div class="text-success">Esto no deberia aparecer</div>');
+                    },
+                    error: function(xhr) {
+                        $container.html(`
+                            <div class="text-danger">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                                <strong>Error ${xhr.status}</strong> - ${xhr.statusText}
+                                <br>
+                                <span class="small">La URL no existe (simulacion de error)</span>
+                            </div>
+                        `);
+                    }
+                });
+            });
+            
+            // $.getJSON()
+            $('#btnGetJSON').on('click', function() {
+                var $container = $('#resultadoAjaxSimple');
+                $container.html('<div class="text-center"><div class="spinner-carga"></div><p class="text-muted mt-2">Cargando con $.getJSON()...</p></div>');
+                
+                $.getJSON('https://jsonplaceholder.typicode.com/users/1', function(data) {
+                    $container.html(`
+                        <div class="usuario-item">
+                            <div class="nombre"><i class="bi bi-person-circle text-primary"></i> ${data.name}</div>
+                            <div class="email"><i class="bi bi-envelope"></i> ${data.email}</div>
+                            <div class="small text-muted"><i class="bi bi-telephone"></i> ${data.phone}</div>
+                            <div class="small text-muted"><i class="bi bi-globe"></i> ${data.website}</div>
+                        </div>
+                        <p class="text-muted small mt-2"><i class="bi bi-check-circle text-success"></i> Datos obtenidos con $.getJSON()</p>
+                    `);
+                }).fail(function() {
+                    $container.html('<div class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Error al cargar los datos</div>');
+                });
+            });
+            
+            // $.get()
+            $('#btnGet').on('click', function() {
+                var $container = $('#resultadoAjaxSimple');
+                $container.html('<div class="text-center"><div class="spinner-carga"></div><p class="text-muted mt-2">Cargando con $.get()...</p></div>');
+                
+                $.get('https://jsonplaceholder.typicode.com/users/2', function(data) {
+                    $container.html(`
+                        <div class="usuario-item" style="border-left-color: #0d6efd;">
+                            <div class="nombre"><i class="bi bi-person-circle text-primary"></i> ${data.name}</div>
+                            <div class="email"><i class="bi bi-envelope"></i> ${data.email}</div>
+                            <div class="small text-muted"><i class="bi bi-building"></i> ${data.company ? data.company.name : ''}</div>
+                        </div>
+                        <p class="text-muted small mt-2"><i class="bi bi-check-circle text-success"></i> Datos obtenidos con $.get()</p>
+                    `);
+                }).fail(function() {
+                    $container.html('<div class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Error al cargar los datos</div>');
+                });
+            });
+            
+            // $.post()
+            $('#btnPost').on('click', function() {
+                var $container = $('#resultadoAjaxSimple');
+                $container.html('<div class="text-center"><div class="spinner-carga"></div><p class="text-muted mt-2">Enviando con $.post()...</p></div>');
+                
+                $.post(
+                    'https://jsonplaceholder.typicode.com/users',
+                    { name: 'Juan Perez', email: 'juan@email.com' },
+                    function(data) {
+                        $container.html(`
+                            <div class="usuario-item" style="border-left-color: #198754;">
+                                <div class="nombre"><i class="bi bi-check-circle text-success"></i> Usuario creado</div>
+                                <div class="email">ID: ${data.id} - ${data.name}</div>
+                            </div>
+                            <p class="text-muted small mt-2"><i class="bi bi-check-circle text-success"></i> POST simulado con $.post()</p>
+                        `);
+                    }
+                ).fail(function() {
+                    $container.html('<div class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Error en la peticion POST</div>');
+                });
+            });
+            
+            // Limpiar Ajax
+            $('#btnAjaxLimpiar').on('click', function() {
+                $('#resultadoAjaxSimple').html(
+                    '<p class="text-muted text-center mb-0"><i class="bi bi-cloud"></i> Haz clic en un boton...</p>'
+                );
+            });
+            
+            // Ajax con loader
+            $('#btnAjaxLoader').on('click', function() {
+                var $status = $('#loaderStatus');
+                $status.html('<div class="spinner-carga d-block mx-auto mb-2"></div> Cargando datos...');
+                
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/users/3',
+                    method: 'GET',
+                    success: function(data) {
+                        $status.html(`
+                            <div class="usuario-item" style="border-left-color: #198754; text-align:left;">
+                                <div class="nombre"><i class="bi bi-person-circle text-primary"></i> ${data.name}</div>
+                                <div class="email"><i class="bi bi-envelope"></i> ${data.email}</div>
+                            </div>
+                            <span class="text-muted small"><i class="bi bi-check-circle text-success"></i> Carga completada</span>
+                        `);
+                    },
+                    error: function() {
+                        $status.html('<span class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Error al cargar</span>');
+                    }
+                });
+            });
+            
+            // Simular error handler
+            $('#btnAjaxErrorHandler').on('click', function() {
+                var $status = $('#loaderStatus');
+                $status.html('<div class="spinner-carga d-block mx-auto mb-2"></div> Intentando conectar...');
+                
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/invalid-endpoint',
+                    method: 'GET',
+                    timeout: 2000,
+                    success: function() {
+                        $status.html('<span class="text-success">Conexion exitosa</span>');
+                    },
+                    error: function(xhr, status, error) {
+                        $status.html(`
+                            <span class="text-danger">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                                Error: ${xhr.status} - ${status}
+                                <br>
+                                <span class="small">No se pudo conectar con el servidor</span>
+                            </span>
+                        `);
+                    }
+                });
+            });
+            
+            console.log('Todos los ejemplos cargados correctamente');
+            
+        });
+    </script>
+
+</body>
+</html>
