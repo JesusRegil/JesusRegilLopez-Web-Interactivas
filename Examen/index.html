@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MovieReviews - Películas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top site-navbar">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-film me-2"></i>Movie<span>Reviews</span></a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li></ul>
+      <div class="input-group navbar-search me-lg-3 my-3 my-lg-0">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input id="busqueda" type="search" class="form-control" placeholder="Buscar película...">
+      </div>
+      <button class="btn btn-nav-favorites" id="btnFavoritos">
+        <i class="bi bi-heart-fill me-1"></i> Favoritos
+        <span class="badge text-bg-danger ms-1" id="contadorFavoritos">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="container py-4">
+  <header class="page-heading text-center mb-4">
+    <h1 class="fw-bold mb-1"><i class="bi bi-film me-2"></i>Películas <span>Destacadas</span></h1>
+    <p class="text-muted mb-0">Las mejores películas según la crítica y el público</p>
+  </header>
+
+  <div class="d-flex flex-wrap gap-2 mb-4" id="filtros">
+    <button class="btn filtro active" data-desde="0" data-hasta="9999">Todos</button>
+    <button class="btn filtro" data-desde="1990" data-hasta="1999">1990-1999</button>
+    <button class="btn filtro" data-desde="2000" data-hasta="2009">2000-2009</button>
+    <button class="btn filtro" data-desde="2010" data-hasta="2019">2010-2019</button>
+    <button class="btn filtro" data-desde="2020" data-hasta="2026">2020-2026</button>
+  </div>
+
+  <div id="cargando" class="text-center py-5">
+    <div class="spinner-border text-dark" role="status"></div>
+    <p class="mt-2">Cargando películas...</p>
+  </div>
+
+  <div id="error" class="alert alert-danger d-none text-center">
+    <i class="bi bi-exclamation-triangle me-2"></i>
+    <span>No fue posible cargar las películas.</span>
+    <button class="btn btn-sm btn-danger ms-2" id="reintentar">Reintentar</button>
+  </div>
+
+  <div id="peliculas" class="row g-4"></div>
+</main>
+
+<div class="modal fade" id="modalFavoritos" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-heart-fill text-danger me-2"></i>Mis favoritos</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="listaFavoritos" class="row g-3"></div>
+        <div id="sinFavoritos" class="text-center text-muted py-4 d-none">
+          <i class="bi bi-heart fs-1"></i><p class="mt-2">No tienes películas favoritas.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="eliminarTodos" class="btn btn-outline-danger">Eliminar todos</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.js"></script>
+</body>
+</html>

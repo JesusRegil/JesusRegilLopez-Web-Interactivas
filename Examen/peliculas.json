@@ -1,0 +1,314 @@
+[
+  {
+    "id": "tt0111161",
+    "primaryTitle": "The Shawshank Redemption",
+    "startYear": 1994,
+    "runtimeMinutes": 142,
+    "averageRating": 9.3,
+    "numVotes": 2800000,
+    "primaryImage": "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGFi.jpg",
+    "genres": [
+      "Drama"
+    ],
+    "description": "Dos hombres encarcelados encuentran esperanza y amistad durante años dentro de prisión.",
+    "spokenLanguages": [
+      "English"
+    ],
+    "countriesOfOrigin": [
+      "United States"
+    ],
+    "interests": [
+      "Prison",
+      "Friendship",
+      "Hope"
+    ],
+    "budget": 25000000,
+    "grossWorldwide": 28884504,
+    "contentRating": "R",
+    "productionCompanies": [
+      "Castle Rock Entertainment"
+    ],
+    "externalLinks": [
+      {
+        "label": "IMDb",
+        "url": "https://www.imdb.com/title/tt0111161/"
+      }
+    ],
+    "trailer": "https://www.youtube.com/results?search_query=The+Shawshank+Redemption+trailer"
+  },
+  {
+    "id": "tt0133093",
+    "primaryTitle": "The Matrix",
+    "startYear": 1999,
+    "runtimeMinutes": 136,
+    "averageRating": 8.7,
+    "numVotes": 2100000,
+    "primaryImage": "https://m.media-amazon.com/images/M/MV5BNzA5ZD.jpg",
+    "genres": [
+      "Action",
+      "Sci-Fi"
+    ],
+    "description": "Un programador descubre que la realidad que conoce es una simulación.",
+    "spokenLanguages": [
+      "English"
+    ],
+    "countriesOfOrigin": [
+      "United States",
+      "Australia"
+    ],
+    "interests": [
+      "Artificial Intelligence",
+      "Simulation",
+      "Cyberpunk"
+    ],
+    "budget": 63000000,
+    "grossWorldwide": 467222728,
+    "contentRating": "R",
+    "productionCompanies": [
+      "Warner Bros."
+    ],
+    "externalLinks": [
+      {
+        "label": "IMDb",
+        "url": "https://www.imdb.com/title/tt0133093/"
+      }
+    ],
+    "trailer": "https://www.youtube.com/results?search_query=The+Matrix+trailer"
+  },
+  {
+    "id": "tt0468569",
+    "primaryTitle": "The Dark Knight",
+    "startYear": 2008,
+    "runtimeMinutes": 152,
+    "averageRating": 9.0,
+    "numVotes": 3000000,
+    "primaryImage": "https://m.media-amazon.com/images/M/MV5BMTMxNT.jpg",
+    "genres": [
+      "Action",
+      "Crime",
+      "Drama"
+    ],
+    "description": "Batman se enfrenta a un criminal que busca sumir Gotham en el caos.",
+    "spokenLanguages": [
+      "English"
+    ],
+    "countriesOfOrigin": [
+      "United States",
+      "United Kingdom"
+    ],
+    "interests": [
+      "Superheroes",
+      "Crime",
+      "Chaos"
+    ],
+    "budget": 185000000,
+    "grossWorldwide": 1004558444,
+    "contentRating": "PG-13",
+    "productionCompanies": [
+      "Warner Bros."
+    ],
+    "externalLinks": [
+      {
+        "label": "IMDb",
+        "url": "https://www.imdb.com/title/tt0468569/"
+      }
+    ],
+    "trailer": "https://www.youtube.com/results?search_query=The+Dark+Knight+trailer"
+  },
+  {
+    "id": "tt4154796",
+    "primaryTitle": "Avengers: Endgame",
+    "startYear": 2019,
+    "runtimeMinutes": 181,
+    "averageRating": 8.4,
+    "numVotes": 1400000,
+    "primaryImage": "https://m.media-amazon.com/images/M/MV5BMD.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama"
+    ],
+    "description": "Los Vengadores intentan revertir las consecuencias de una batalla devastadora.",
+    "spokenLanguages": [
+      "English"
+    ],
+    "countriesOfOrigin": [
+      "United States"
+    ],
+    "interests": [
+      "Superheroes",
+      "Time Travel",
+      "Team"
+    ],
+    "budget": 356000000,
+    "grossWorldwide": 2799439100,
+    "contentRating": "PG-13",
+    "productionCompanies": [
+      "Marvel Studios"
+    ],
+    "externalLinks": [
+      {
+        "label": "IMDb",
+        "url": "https://www.imdb.com/title/tt4154796/"
+      }
+    ],
+    "trailer": "https://www.youtube.com/results?search_query=Avengers+Endgame+trailer"
+  },
+  {
+    "id": "tt1160419",
+    "primaryTitle": "Dune",
+    "startYear": 2021,
+    "runtimeMinutes": 155,
+    "averageRating": 8.0,
+    "numVotes": 900000,
+    "primaryImage": "https://m.media-amazon.com/images/M/MV5BN2.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama"
+    ],
+    "description": "Un joven noble viaja a un planeta desértico donde su familia debe proteger un recurso vital.",
+    "spokenLanguages": [
+      "English"
+    ],
+    "countriesOfOrigin": [
+      "United States",
+      "Canada"
+    ],
+    "interests": [
+      "Desert",
+      "Politics",
+      "Space"
+    ],
+    "budget": 165000000,
+    "grossWorldwide": 402127830,
+    "contentRating": "PG-13",
+    "productionCompanies": [
+      "Legendary Pictures"
+    ],
+    "externalLinks": [
+      {
+        "label": "IMDb",
+        "url": "https://www.imdb.com/title/tt1160419/"
+      }
+    ],
+    "trailer": "https://www.youtube.com/results?search_query=Dune+2021+trailer"
+  },
+  {
+    "id": "tt1745960",
+    "primaryTitle": "Top Gun: Maverick",
+    "startYear": 2022,
+    "runtimeMinutes": 130,
+    "averageRating": 8.2,
+    "numVotes": 800000,
+    "primaryImage": "https://m.media-amazon.com/images/M/MV5B.jpg",
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "description": "Un piloto veterano regresa para entrenar a una nueva generación de aviadores.",
+    "spokenLanguages": [
+      "English"
+    ],
+    "countriesOfOrigin": [
+      "United States"
+    ],
+    "interests": [
+      "Aviation",
+      "Military",
+      "Mentorship"
+    ],
+    "budget": 170000000,
+    "grossWorldwide": 1495695924,
+    "contentRating": "PG-13",
+    "productionCompanies": [
+      "Paramount Pictures"
+    ],
+    "externalLinks": [
+      {
+        "label": "IMDb",
+        "url": "https://www.imdb.com/title/tt1745960/"
+      }
+    ],
+    "trailer": "https://www.youtube.com/results?search_query=Top+Gun+Maverick+trailer"
+  },
+  {
+    "id": "tt15398776",
+    "primaryTitle": "Oppenheimer",
+    "startYear": 2023,
+    "runtimeMinutes": 180,
+    "averageRating": 8.6,
+    "numVotes": 900000,
+    "primaryImage": "https://m.media-amazon.com/images/M/MV5B.jpg",
+    "genres": [
+      "Biography",
+      "Drama",
+      "History"
+    ],
+    "description": "La historia del científico que dirigió el proyecto que desarrolló la primera bomba atómica.",
+    "spokenLanguages": [
+      "English"
+    ],
+    "countriesOfOrigin": [
+      "United States",
+      "United Kingdom"
+    ],
+    "interests": [
+      "Science",
+      "History",
+      "Politics"
+    ],
+    "budget": 100000000,
+    "grossWorldwide": 976836842,
+    "contentRating": "R",
+    "productionCompanies": [
+      "Universal Pictures"
+    ],
+    "externalLinks": [
+      {
+        "label": "IMDb",
+        "url": "https://www.imdb.com/title/tt15398776/"
+      }
+    ],
+    "trailer": "https://www.youtube.com/results?search_query=Oppenheimer+trailer"
+  },
+  {
+    "id": "tt9362722",
+    "primaryTitle": "Spider-Man: Across the Spider-Verse",
+    "startYear": 2023,
+    "runtimeMinutes": 140,
+    "averageRating": 8.6,
+    "numVotes": 400000,
+    "primaryImage": "https://m.media-amazon.com/images/M/MV5B.jpg",
+    "genres": [
+      "Animation",
+      "Action",
+      "Adventure"
+    ],
+    "description": "Miles Morales viaja por distintas dimensiones y se encuentra con una sociedad de Spider-People.",
+    "spokenLanguages": [
+      "English"
+    ],
+    "countriesOfOrigin": [
+      "United States"
+    ],
+    "interests": [
+      "Multiverse",
+      "Superheroes",
+      "Animation"
+    ],
+    "budget": 100000000,
+    "grossWorldwide": 690962184,
+    "contentRating": "PG",
+    "productionCompanies": [
+      "Sony Pictures Animation"
+    ],
+    "externalLinks": [
+      {
+        "label": "IMDb",
+        "url": "https://www.imdb.com/title/tt9362722/"
+      }
+    ],
+    "trailer": "https://www.youtube.com/results?search_query=Spider-Man+Across+the+Spider-Verse+trailer"
+  }
+]

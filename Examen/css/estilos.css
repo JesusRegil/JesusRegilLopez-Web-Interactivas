@@ -1,0 +1,38 @@
+body { background:#f5f7fb; color:#20242c; }
+.site-navbar { background:#20242c; }
+.navbar-brand { color:#fff; }
+.navbar-brand i, .navbar-brand span, .page-heading span { color:#1769e0; }
+.navbar-nav .nav-link { color:#d8dee9; }
+.navbar-nav .nav-link.active, .navbar-nav .nav-link:hover { color:#fff; }
+.navbar-search { width:260px; }
+.navbar-search .input-group-text { color:#6b7280; background:#fff; border:0; }
+.navbar-search .form-control { border:0; }
+.btn-nav-favorites { color:#fff; border:1px solid #526071; }
+.btn-nav-favorites:hover { color:#fff; background:#1769e0; border-color:#1769e0; }
+.page-heading h1 { font-size:clamp(2rem, 4vw, 3rem); }
+.page-heading h1 i { color:#1769e0; }
+#filtros { justify-content:center; }
+.filtro { border:1px solid #b9c0ca; border-radius:999px; color:#4b5563; background:#fff; padding:.3rem .9rem; }
+.filtro:hover, .filtro.active { color:#fff; background:#1769e0; border-color:#1769e0; }
+.movie-card { height:100%; border-radius:8px; overflow:hidden; transition:transform .2s, box-shadow .2s; }
+.movie-card:hover { transform:translateY(-5px); }
+.poster { height:300px; object-fit:cover; }
+.movie-card .card-body { min-height:142px; }
+.movie-card .card-title { font-size:.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.movie-card .btn-dark, .detail-panel .btn-dark { background:#1769e0; border-color:#1769e0; }
+.movie-card .btn-dark:hover, .detail-panel .btn-dark:hover { background:#0d55be; border-color:#0d55be; }
+.movie-poster { width:100%; max-height:620px; object-fit:cover; }
+.rating { color:#ffc107; }
+.rating .numero { color:#20242c; margin-left:6px; font-weight:600; }
+.badge-genero { margin-right:5px; margin-bottom:5px; background:#e4efff!important; color:#1769e0!important; font-weight:500; }
+.favorite-active, .favorite-active i { color:#dc3545!important; }
+.modal-poster { height:170px; object-fit:cover; }
+.detail-panel { background:#fff; border-radius:10px; padding:2rem; box-shadow:0 .35rem 1.5rem rgba(31,41,55,.08); }
+.detail-panel #descripcion { background:#f8fafc; border-left:3px solid #1769e0; padding:1rem; font-size:1rem; }
+.detail-panel strong { color:#687386; font-size:.85rem; }
+.detail-panel hr { border-color:#e5e7eb; }
+@media(max-width:767px){
+	.navbar-search { width:100%; }
+	.poster { height:360px; }
+	.detail-panel { padding:1rem; }
+}
