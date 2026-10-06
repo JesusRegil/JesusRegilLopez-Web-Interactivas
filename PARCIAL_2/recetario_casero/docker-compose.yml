@@ -1,0 +1,80 @@
+# =====================================================================================
+# Recetario casero - todo en Docker: aplicacion (PHP + Apache + Laravel) y PostgreSQL 16
+#
+#   docker compose up -d --build        ->  http://localhost:8090
+#   docker compose down                 ->  detiene todo (los datos se conservan)
+#   docker compose down -v              ->  detiene todo y BORRA los datos
+#   docker compose --profile test run --rm --build test   ->  pruebas automaticas
+#
+# Variables opcionales (archivo .env junto a este archivo, ver .env.example):
+#   APP_PORT, DB_PASSWORD y APP_KEY. Todo lo demas va fijo aqui.
+# =====================================================================================
+name: recetario-casero
+
+services:
+  app:
+    build:
+      context: .
+      target: runtime
+    image: recetario-casero:local
+    container_name: recetario-app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8090}:80"
+    environment:
+      APP_NAME: "Recetario casero"
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_URL: http://localhost:${APP_PORT:-8090}
+      APP_LOCALE: es
+      APP_FALLBACK_LOCALE: es
+      APP_TIMEZONE: America/Mexico_City
+      # APP_KEY es opcional: solo se pasa si la defines en tu entorno o en .env.
+      # Si no, el contenedor genera una la primera vez y la guarda en el volumen app_storage.
+      APP_KEY:
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: recetario
+      DB_USERNAME: recetario
+      DB_PASSWORD: ${DB_PASSWORD:-recetario}
+      SESSION_DRIVER: file
+      CACHE_STORE: file
+      QUEUE_CONNECTION: sync
+      LOG_CHANNEL: stderr
+    volumes:
+      - app_storage:/var/www/html/storage
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    container_name: recetario-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: recetario
+      POSTGRES_USER: recetario
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-recetario}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U recetario -d recetario"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # Pruebas automaticas (PHPUnit con SQLite en memoria; nunca tocan el PostgreSQL de arriba).
+  # No arranca con "up": hay que pedirlo con --profile test.
+  test:
+    profiles: ["test"]
+    build:
+      context: .
+      target: test
+    image: recetario-casero:test
+    environment:
+      APP_ENV: testing
+
+volumes:
+  pg_data:
+  app_storage:
